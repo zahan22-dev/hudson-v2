@@ -161,19 +161,28 @@
     .social{padding:0;background:var(--paper);color:var(--navy)}
     .social-top{padding:110px 5.55vw 60px;display:flex;align-items:end;justify-content:space-between;gap:30px;flex-wrap:wrap}
     .social-top h2{font:400 clamp(45px,5.5vw,78px)/1 var(--serif);letter-spacing:-.06em;margin:16px 0 0}
-    .social-link{font:13px var(--mono);letter-spacing:.12em;border-bottom:1px solid #5a6b85;padding-bottom:10px;transition:.3s var(--ease)}
-    .social-link:hover{color:#3a5a8c;border-color:#3a5a8c}
-    .insta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 5.55vw 110px}
+    .social-header-left{display:flex;flex-direction:column}
+    .social-profile{display:flex;align-items:center;gap:18px;margin-top:24px}
+    .social-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#3a5a8c,#0a1628);display:grid;place-items:center;color:#fff;flex:0 0 auto}
+    .social-profile-info{display:flex;flex-direction:column;gap:3px}
+    .social-profile-name{font:500 16px var(--sans);color:var(--navy);letter-spacing:.02em}
+    .social-profile-handle{font:13px var(--mono);color:#5a6b85;letter-spacing:.04em}
+    .social-follow{display:inline-flex;align-items:center;gap:10px;background:var(--navy);color:#fff;padding:14px 28px;border-radius:7px;font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;transition:all .35s var(--ease);border:1px solid var(--navy)}
+    .social-follow:hover{background:transparent;color:var(--navy);border-color:var(--navy);transform:translateY(-2px);box-shadow:0 12px 40px -12px rgba(10,22,40,.35)}
+    .social-follow svg{width:18px;height:18px;flex:0 0 auto}
+    .insta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:0 5.55vw 110px}
     .insta-card{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--navy-soft);cursor:pointer}
     .insta-card img{height:100%;transition:transform .7s var(--ease)}
-    .insta-card:hover img{transform:scale(1.07)}
-    .insta-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,13,26,.88) 0%,rgba(5,13,26,.1) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px;opacity:0;transition:opacity .4s var(--ease);color:#fff}
+    .insta-card:hover img{transform:scale(1.08)}
+    .insta-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,13,26,.9) 0%,rgba(5,13,26,.15) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:24px;opacity:0;transition:opacity .4s var(--ease);color:#fff}
     .insta-card:hover .insta-overlay{opacity:1}
-    .insta-handle{font:500 12px var(--mono);letter-spacing:.1em;color:var(--accent-bright);margin-bottom:8px}
-    .insta-caption{font:400 15px/1.5 var(--serif);letter-spacing:-.01em}
-    .insta-meta{display:flex;gap:18px;margin-top:14px;font:11px var(--mono);letter-spacing:.08em;color:#c7d2e0}
+    .insta-handle{font:500 12px var(--mono);letter-spacing:.1em;color:var(--accent-bright);margin-bottom:10px}
+    .insta-caption{font:400 16px/1.5 var(--serif);letter-spacing:-.01em}
+    .insta-meta{display:flex;gap:20px;margin-top:14px;font:11px var(--mono);letter-spacing:.08em;color:#c7d2e0}
     .insta-meta span{display:inline-flex;align-items:center;gap:6px}
-    .insta-badge{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);display:grid;place-items:center;color:#fff;font-size:16px;z-index:2}
+    .insta-badge{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);display:grid;place-items:center;color:#fff;z-index:2;transition:background .3s}
+    .insta-badge svg{width:18px;height:18px}
+    .insta-card:hover .insta-badge{background:rgba(255,255,255,.28)}
 
     /* ---------- Quote ---------- */
     .quote{background:linear-gradient(135deg,var(--navy-soft),var(--navy));color:#fff;padding:150px 12vw;text-align:center;position:relative;overflow:hidden}
@@ -197,12 +206,18 @@
     .footer-col a:hover{color:var(--accent-bright)}
     .newsletter{border-bottom:1px solid #3a4a60;padding:12px 0;display:flex;justify-content:space-between;font:14px var(--sans);color:var(--muted);cursor:pointer;transition:.25s}
     .newsletter:hover{border-color:var(--accent);color:var(--accent-bright)}
+    .footer-follow{margin-top:32px}
+    .footer-follow h4{font:12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+    .footer-socials{display:flex;gap:14px;align-items:center}
+    .footer-socials a{width:42px;height:42px;border-radius:50%;border:1px solid #2a3a52;display:grid;place-items:center;color:#8a94a6;transition:all .35s var(--ease)}
+    .footer-socials a:hover{background:var(--white);border-color:var(--white);color:var(--navy);transform:translateY(-3px);box-shadow:0 8px 24px -8px rgba(255,255,255,.25)}
+    .footer-socials svg{width:18px;height:18px}
     .footer-base{border-top:1px solid var(--line);padding-top:26px;display:flex;justify-content:space-between;color:var(--muted);font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase}
 
     /* ---------- Responsive ---------- */
     @media(max-width:1100px){
       .product-grid{grid-template-columns:repeat(2,1fr)}
-      .insta-grid{grid-template-columns:repeat(3,1fr)}
+      .insta-grid{grid-template-columns:repeat(2,1fr)}
       nav{gap:24px}
       .header-actions{gap:20px}
     }
@@ -247,6 +262,7 @@
       .social-top{padding:78px 23px 40px;display:block}
       .social-link{display:inline-block;margin-top:28px}
       .insta-grid{grid-template-columns:repeat(2,1fr);padding:0 23px 80px;gap:12px}
+      .social-profile{flex-wrap:wrap}
       .quote{padding:95px 23px}
       .quote blockquote{font-size:35px}
       .cta{min-height:460px}
@@ -260,7 +276,7 @@
     }
     @media(max-width:480px){
       .product-grid{grid-template-columns:1fr}
-      .insta-grid{grid-template-columns:1fr 1fr}
+      .insta-grid{grid-template-columns:1fr}
       .hero h1{font-size:clamp(48px,13vw,68px)}
       .section-head h2{font-size:38px}
       .reserve-content h2{font-size:42px}
@@ -405,50 +421,55 @@
 
     <section class="social" id="journal">
       <div class="social-top">
-        <div><div class="eyebrow">Follow the conversation</div><h2>From the Hudson world.</h2></div>
-        <a href="#" class="social-link">@hudsonwatchexchange&nbsp; ↗</a>
+        <div class="social-header-left">
+          <div class="eyebrow">Follow the conversation</div>
+          <h2>From the Hudson world.</h2>
+          <div class="social-profile">
+            <div class="social-avatar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+            </div>
+            <div class="social-profile-info">
+              <span class="social-profile-name">Danny Vassallo</span>
+              <span class="social-profile-handle">@dannyvassallo_</span>
+            </div>
+          </div>
+        </div>
+        <a href="https://www.instagram.com/dannyvassallo_/" target="_blank" rel="noopener noreferrer" class="social-follow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+          Follow
+        </a>
       </div>
       <div class="insta-grid">
-        <div class="insta-card">
-          <img src="https://images.unsplash.com/photo-1495856458515-0637185db551?auto=format&fit=crop&w=700&q=85" alt="Watch collector detail">
-          <span class="insta-badge">♡</span>
-          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">A Daytona finds its next custodian.</div><div class="insta-meta"><span>♡ 1,284</span><span>💬 38</span></div></div>
-        </div>
-        <div class="insta-card">
-          <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&q=85" alt="Luxury wristwatch">
-          <span class="insta-badge">♡</span>
-          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">Client delivery — Royal Oak, sealed.</div><div class="insta-meta"><span>♡ 2,041</span><span>💬 67</span></div></div>
-        </div>
-        <div class="insta-card">
+        <a class="insta-card" href="https://www.instagram.com/dannyvassallo_/" target="_blank" rel="noopener noreferrer">
+          <img src="https://images.unsplash.com/photo-1495856458515-0637185db551?auto=format&fit=crop&w=700&q=85" alt="Luxury watch collector detail">
+          <span class="insta-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></span>
+          <div class="insta-overlay"><div class="insta-handle">@dannyvassallo_</div><div class="insta-caption">A Daytona finds its next custodian.</div><div class="insta-meta"><span>♡ 1,284</span><span>💬 38</span></div></div>
+        </a>
+        <a class="insta-card" href="https://www.instagram.com/dannyvassallo_/" target="_blank" rel="noopener noreferrer">
+          <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&q=85" alt="Luxury wristshot">
+          <span class="insta-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></span>
+          <div class="insta-overlay"><div class="insta-handle">@dannyvassallo_</div><div class="insta-caption">Client delivery — Royal Oak, sealed.</div><div class="insta-meta"><span>♡ 2,041</span><span>💬 67</span></div></div>
+        </a>
+        <a class="insta-card" href="https://www.instagram.com/dannyvassallo_/" target="_blank" rel="noopener noreferrer">
           <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=85" alt="Luxury handbag detail">
-          <span class="insta-badge">♡</span>
-          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">Hermès Kelly, freshly authenticated.</div><div class="insta-meta"><span>♡ 976</span><span>💬 22</span></div></div>
-        </div>
-        <div class="insta-card">
-          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=700&q=85" alt="Fine watch mechanism">
-          <span class="insta-badge">♡</span>
-          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">The movement, up close. Perfection in motion.</div><div class="insta-meta"><span>♡ 1,572</span><span>💬 44</span></div></div>
-        </div>
-        <div class="insta-card">
-          <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=85" alt="Boutique lifestyle">
-          <span class="insta-badge">♡</span>
-          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">Inside the Hudson boutique, by appointment.</div><div class="insta-meta"><span>♡ 831</span><span>💬 19</span></div></div>
-        </div>
-        <div class="insta-card">
-          <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=700&q=85" alt="Collector delivery">
-          <span class="insta-badge">♡</span>
-          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">Cosmograph Daytona — handed to its new keeper.</div><div class="insta-meta"><span>♡ 2,318</span><span>💬 81</span></div></div>
-        </div>
-        <div class="insta-card">
-          <img src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?auto=format&fit=crop&w=700&q=85" alt="Cartier Tank">
-          <span class="insta-badge">♡</span>
-          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">A vintage Tank Française, circa 1998.</div><div class="insta-meta"><span>♡ 1,109</span><span>💬 31</span></div></div>
-        </div>
-        <div class="insta-card">
-          <img src="https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=700&q=85" alt="Audemars Piguet">
-          <span class="insta-badge">♡</span>
-          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">Royal Oak Selfwinding — grail territory.</div><div class="insta-meta"><span>♡ 1,845</span><span>💬 52</span></div></div>
-        </div>
+          <span class="insta-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></span>
+          <div class="insta-overlay"><div class="insta-handle">@dannyvassallo_</div><div class="insta-caption">Hermès Kelly, freshly authenticated.</div><div class="insta-meta"><span>♡ 976</span><span>💬 22</span></div></div>
+        </a>
+        <a class="insta-card" href="https://www.instagram.com/dannyvassallo_/" target="_blank" rel="noopener noreferrer">
+          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=700&q=85" alt="Fine watch mechanism macro">
+          <span class="insta-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></span>
+          <div class="insta-overlay"><div class="insta-handle">@dannyvassallo_</div><div class="insta-caption">The movement, up close. Perfection in motion.</div><div class="insta-meta"><span>♡ 1,572</span><span>💬 44</span></div></div>
+        </a>
+        <a class="insta-card" href="https://www.instagram.com/dannyvassallo_/" target="_blank" rel="noopener noreferrer">
+          <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=85" alt="Boutique interior lifestyle">
+          <span class="insta-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></span>
+          <div class="insta-overlay"><div class="insta-handle">@dannyvassallo_</div><div class="insta-caption">Inside the Hudson boutique, by appointment.</div><div class="insta-meta"><span>♡ 831</span><span>💬 19</span></div></div>
+        </a>
+        <a class="insta-card" href="https://www.instagram.com/dannyvassallo_/" target="_blank" rel="noopener noreferrer">
+          <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=700&q=85" alt="Collector delivery wrist shot">
+          <span class="insta-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></span>
+          <div class="insta-overlay"><div class="insta-handle">@dannyvassallo_</div><div class="insta-caption">Cosmograph Daytona — handed to its new keeper.</div><div class="insta-meta"><span>♡ 2,318</span><span>💬 81</span></div></div>
+        </a>
       </div>
     </section>
 
@@ -484,6 +505,23 @@
       <div class="footer-col">
         <h4>Letters from Hudson</h4>
         <div class="newsletter"><span>Your email address</span><span>→</span></div>
+        <div class="footer-follow">
+          <h4>Follow Us</h4>
+          <div class="footer-socials">
+            <a href="https://www.linkedin.com/in/danny-vassallo-3547b118/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/dannyvassallo_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.tiktok.com/@hudsonwatchexchange" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.73 2.89 2.89 0 0 1 3.96-3.96V10.9a6.33 6.33 0 0 0-1.08-.1A6.34 6.34 0 1 0 12 20.55V11.5a8.16 8.16 0 0 0 4.71 1.5V9.55a4.85 4.85 0 0 1-2.88-1.55V6.69h3.76z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61578637798672" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.02 4.39 11.01 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8v8.44C19.61 23.08 24 18.09 24 12.07z"/></svg>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="footer-base">
