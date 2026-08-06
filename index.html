@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a1628" />
+  <title>Hudson Watch Exchange — Objects of Lasting Value</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --navy:#0a1628;
+      --navy-deep:#050d1a;
+      --navy-soft:#122236;
+      --navy-card:#0f1d30;
+      --paper:#f5f7fa;
+      --paper-warm:#eef2f7;
+      --white:#ffffff;
+      --line:rgba(255,255,255,.13);
+      --line-dark:rgba(10,22,40,.12);
+      --muted:#8a94a6;
+      --muted-light:#aeb9c9;
+      --accent:#aebfd4;
+      --accent-bright:#d4dde8;
+      --serif:"Playfair Display", Georgia, serif;
+      --sans:"DM Sans", Arial, sans-serif;
+      --mono:"DM Mono", monospace;
+      --ease:cubic-bezier(.2,.7,.2,1);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--navy);color:#eef2f7;font-family:var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+    a{color:inherit;text-decoration:none}
+    img{display:block;width:100%;object-fit:cover}
+    .eyebrow{font:500 12px/1.3 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .display{font-family:var(--serif);font-weight:400;letter-spacing:-.045em}
+    .section{padding:160px 5.55vw;position:relative}
+    .section-head{display:grid;grid-template-columns:1fr 2fr;gap:40px;align-items:start;margin-bottom:80px}
+    .section-head h2{font:400 clamp(44px,5.4vw,82px)/.98 var(--serif);letter-spacing:-.055em;margin:0;max-width:690px}
+    .section-head p{font-size:17px;line-height:1.75;max-width:420px;color:var(--muted-light);margin:14px 0 0 auto}
+    .rule{height:1px;background:var(--line)}
+
+    /* ---------- Buttons ---------- */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;border-radius:7px;padding:17px 34px;font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;transition:all .35s var(--ease);white-space:nowrap}
+    .btn-primary{background:var(--white);color:var(--navy);border-color:var(--white)}
+    .btn-primary:hover{background:transparent;color:var(--white);border-color:var(--accent-bright);box-shadow:0 12px 40px -12px rgba(174,191,212,.5);transform:translateY(-2px)}
+    .btn-outline{background:transparent;color:var(--white);border-color:rgba(255,255,255,.4)}
+    .btn-outline:hover{background:var(--white);color:var(--navy);border-color:var(--white);transform:translateY(-2px);box-shadow:0 12px 40px -12px rgba(255,255,255,.35)}
+    .btn-navy{background:var(--navy);color:var(--white);border-color:var(--navy)}
+    .btn-navy:hover{background:var(--navy-soft);border-color:var(--navy-soft);transform:translateY(-2px);box-shadow:0 12px 40px -12px rgba(10,22,40,.5)}
+    .text-link{display:inline-flex;align-items:center;gap:16px;color:var(--accent-bright);font:500 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid rgba(212,221,232,.45);padding-bottom:12px;transition:.3s var(--ease)}
+    .text-link:hover{gap:26px;border-color:var(--accent-bright)}
+    .text-link span{transition:transform .3s var(--ease)}
+    .text-link:hover span{transform:translateX(4px)}
+
+    /* ---------- Header / Logo ---------- */
+    header{position:absolute;z-index:10;top:0;left:0;width:100%;height:104px;padding:0 4.2vw;display:flex;align-items:center;justify-content:space-between;color:#fff;transition:.35s ease}
+    header.scrolled{position:fixed;height:78px;background:rgba(10,22,40,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .logo{display:flex;flex-direction:column;line-height:1;gap:4px}
+    .logo-word{font:500 21px/1 var(--serif);letter-spacing:.32em;text-transform:uppercase;color:#fff;display:flex;align-items:center;gap:14px}
+    .logo-word:before{content:"";display:inline-block;width:7px;height:7px;border:1px solid var(--accent-bright);transform:rotate(45deg);flex:0 0 auto}
+    .logo-sub{font:500 9px/1 var(--mono);letter-spacing:.42em;text-transform:uppercase;color:var(--accent);padding-left:21px}
+    nav{display:flex;align-items:center;gap:36px;font:500 13px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+    nav a{opacity:.82;transition:color .25s,opacity .25s;position:relative;padding:6px 0}
+    nav a:after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--accent-bright);transition:width .3s var(--ease)}
+    nav a:hover{color:var(--accent-bright);opacity:1}
+    nav a:hover:after{width:100%}
+    .header-actions{display:flex;align-items:center;gap:26px;font:500 13px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+    .header-actions>a{opacity:.82;transition:.25s}
+    .header-actions>a:hover{opacity:1;color:var(--accent-bright)}
+    .menu-button{display:none;background:none;border:0;color:white;padding:8px;font:inherit;letter-spacing:.12em}
+
+    /* ---------- Hero ---------- */
+    .hero{height:100svh;min-height:720px;position:relative;background:var(--navy-deep);overflow:hidden;display:flex;align-items:center;padding:0 5.55vw}
+    .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;background:var(--navy-deep)}
+    .hero-overlay{position:absolute;inset:0;z-index:1;background-image:linear-gradient(90deg,rgba(5,13,26,.82) 0%,rgba(5,13,26,.5) 45%,rgba(5,13,26,.3)),linear-gradient(0deg,rgba(5,13,26,.78),transparent 52%)}
+    .hero-copy{position:relative;z-index:2;max-width:1100px;animation:rise .9s .15s both}
+    @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+    .hero h1{font:400 clamp(60px,9vw,144px)/.88 var(--serif);letter-spacing:-.07em;margin:30px 0 56px;max-width:980px}
+    .hero-bottom{display:flex;flex-direction:column;align-items:flex-start;gap:44px}
+    .hero-description{font-size:19px;line-height:1.75;color:#d4dde8;max-width:560px;margin:0;font-weight:400}
+    .hero-count{position:absolute;right:5.55vw;top:49%;z-index:2;color:#c7d2e0;font:11px var(--mono);letter-spacing:.16em;writing-mode:vertical-rl}
+    .hero-scroll{position:absolute;z-index:2;bottom:32px;right:5.55vw;font:11px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#c7d2e0;display:flex;gap:14px;align-items:center}
+    @media (prefers-reduced-motion:reduce){
+      .hero-video{display:none}
+      .hero-overlay{background-image:linear-gradient(90deg,rgba(5,13,26,.82) 0%,rgba(5,13,26,.5) 45%,rgba(5,13,26,.3)),linear-gradient(0deg,rgba(5,13,26,.78),transparent 52%),url("https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=2200&q=90");background-size:cover;background-position:center}
+    }
+    .hero-scroll:after{content:"";height:42px;width:1px;background:var(--accent)}
+
+    /* ---------- Marquee ---------- */
+    .marquee{height:135px;overflow:hidden;border-bottom:1px solid var(--line);border-top:1px solid var(--line);display:flex;align-items:center;background:var(--navy-deep)}
+    .marquee-track{display:flex;white-space:nowrap;animation:marquee 28s linear infinite;font:400 clamp(25px,2.6vw,42px) var(--serif);letter-spacing:-.04em;color:#c7d2e0}
+    .marquee-track span{margin:0 40px;display:inline-flex;align-items:center;gap:40px}
+    .marquee-track i{display:inline-block;width:7px;height:7px;border:1px solid var(--accent);border-radius:50%}
+    @keyframes marquee{to{transform:translateX(-50%)}}
+
+    /* ---------- Collections ---------- */
+    .collections{background:var(--paper);color:var(--navy)}
+    .collections .eyebrow{color:#3a5a8c}
+    .collections .section-head p{color:#4a5568}
+    .collections-grid{display:grid;grid-template-columns:1.13fr .87fr;grid-template-rows:460px 310px;gap:20px}
+    .collection{position:relative;overflow:hidden;color:white;background:var(--navy-soft)}
+    .collection:first-child{grid-row:span 2}
+    .collection img{height:100%;transition:transform .8s var(--ease)}
+    .collection:hover img{transform:scale(1.045)}
+    .collection:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,13,26,.78),transparent 55%)}
+    .collection-content{position:absolute;bottom:38px;left:40px;z-index:1}
+    .collection-content .eyebrow{color:#c7d2e0;margin-bottom:11px}
+    .collection h3{font:400 clamp(32px,3.4vw,50px)/1 var(--serif);letter-spacing:-.05em;margin:0}
+    .collection .plus{position:absolute;right:32px;bottom:38px;z-index:1;width:36px;height:36px;border:1px solid rgba(255,255,255,.55);display:grid;place-items:center;font-size:22px;font-weight:300;transition:.3s var(--ease);border-radius:50%}
+    .collection:hover .plus{background:var(--white);border-color:var(--white);color:var(--navy)}
+
+    /* ---------- Reserve ---------- */
+    .reserve{min-height:840px;padding:0;display:grid;grid-template-columns:50% 50%;background:var(--navy-deep)}
+    .reserve-image{min-height:720px;background:url("media/left.png") center/cover}
+    .reserve-content{padding:11vw 8vw;display:flex;flex-direction:column;justify-content:center}
+    .reserve-content h2{font:400 clamp(48px,5.6vw,86px)/.98 var(--serif);letter-spacing:-.06em;margin:22px 0 32px}
+    .reserve-content p{max-width:480px;font-size:18px;line-height:1.8;color:#b8c3d4;margin:0 0 40px}
+    .reserve-details{margin-top:72px;border-top:1px solid var(--line)}
+    .reserve-details div{padding:20px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;font:13px var(--mono);letter-spacing:.08em}
+    .reserve-details span:last-child{color:var(--accent-bright)}
+
+    /* ---------- Why ---------- */
+    .why{padding-bottom:140px;background:var(--navy)}
+    .pillars{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line)}
+    .pillar{padding:38px 38px 0 0;min-height:250px;border-right:1px solid var(--line);margin-top:32px}
+    .pillar:not(:first-child){padding-left:36px}
+    .pillar:last-child{border-right:0}
+    .pillar-number{color:var(--accent);font:12px var(--mono);letter-spacing:.14em}
+    .pillar h3{font:400 33px/1.15 var(--serif);letter-spacing:-.04em;margin:46px 0 16px}
+    .pillar p{font-size:16px;line-height:1.75;color:var(--muted-light);max-width:300px;margin:0}
+
+    /* ---------- Arrivals ---------- */
+    .arrivals{background:var(--paper-warm);color:var(--navy)}
+    .arrivals .eyebrow{color:#3a5a8c}
+    .arrivals .section-head p{color:#4a5568}
+    .product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+    .product-image{height:400px;background:#cfd8e3;overflow:hidden;position:relative}
+    .product-image img{height:100%;transition:.7s var(--ease)}
+    .product:hover .product-image img{transform:scale(1.055)}
+    .product-tag{position:absolute;left:16px;top:16px;background:var(--navy);color:#eaf0f7;padding:9px 12px;font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+    .product-info{padding:22px 0 0;display:flex;justify-content:space-between;gap:14px}
+    .product-brand{font:500 12px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#5a6b85;margin-bottom:9px}
+    .product h3{font:400 23px/1.15 var(--serif);letter-spacing:-.03em;margin:0}
+    .price{font:500 14px var(--mono);white-space:nowrap;margin-top:24px;color:var(--navy)}
+
+    /* ---------- Process ---------- */
+    .process{background:var(--navy-deep)}
+    .process-wrap{display:grid;grid-template-columns:42% 58%;gap:7vw}
+    .process h2{font:400 clamp(48px,5.3vw,78px)/.98 var(--serif);letter-spacing:-.06em;margin:20px 0 30px}
+    .process-intro{color:var(--muted-light);font-size:18px;line-height:1.8;max-width:400px}
+    .steps{border-top:1px solid var(--line)}
+    .step{border-bottom:1px solid var(--line);padding:34px 0;display:grid;grid-template-columns:70px 1fr auto;align-items:center;gap:24px;transition:.3s var(--ease)}
+    .step:hover{padding-left:14px}
+    .step-no{font:12px var(--mono);color:var(--accent);letter-spacing:.12em}
+    .step h3{margin:0;font:400 33px var(--serif);letter-spacing:-.04em}
+    .arrow{color:var(--accent);font-size:23px}
+
+    /* ---------- Social ---------- */
+    .social{padding:0;background:var(--paper);color:var(--navy)}
+    .social-top{padding:110px 5.55vw 60px;display:flex;align-items:end;justify-content:space-between;gap:30px;flex-wrap:wrap}
+    .social-top h2{font:400 clamp(45px,5.5vw,78px)/1 var(--serif);letter-spacing:-.06em;margin:16px 0 0}
+    .social-link{font:13px var(--mono);letter-spacing:.12em;border-bottom:1px solid #5a6b85;padding-bottom:10px;transition:.3s var(--ease)}
+    .social-link:hover{color:#3a5a8c;border-color:#3a5a8c}
+    .insta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 5.55vw 110px}
+    .insta-card{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--navy-soft);cursor:pointer}
+    .insta-card img{height:100%;transition:transform .7s var(--ease)}
+    .insta-card:hover img{transform:scale(1.07)}
+    .insta-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,13,26,.88) 0%,rgba(5,13,26,.1) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:22px;opacity:0;transition:opacity .4s var(--ease);color:#fff}
+    .insta-card:hover .insta-overlay{opacity:1}
+    .insta-handle{font:500 12px var(--mono);letter-spacing:.1em;color:var(--accent-bright);margin-bottom:8px}
+    .insta-caption{font:400 15px/1.5 var(--serif);letter-spacing:-.01em}
+    .insta-meta{display:flex;gap:18px;margin-top:14px;font:11px var(--mono);letter-spacing:.08em;color:#c7d2e0}
+    .insta-meta span{display:inline-flex;align-items:center;gap:6px}
+    .insta-badge{position:absolute;top:16px;right:16px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);display:grid;place-items:center;color:#fff;font-size:16px;z-index:2}
+
+    /* ---------- Quote ---------- */
+    .quote{background:linear-gradient(135deg,var(--navy-soft),var(--navy));color:#fff;padding:150px 12vw;text-align:center;position:relative;overflow:hidden}
+    .quote:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(174,191,212,.12),transparent 50%)}
+    .quote-mark{font:80px/30px var(--serif);display:block;margin-bottom:30px;color:var(--accent-bright);position:relative}
+    .quote blockquote{font:400 clamp(33px,4.6vw,68px)/1.14 var(--serif);letter-spacing:-.055em;max-width:1080px;margin:0 auto;position:relative}
+    .quote cite{display:block;margin-top:40px;font:12px var(--mono);letter-spacing:.18em;text-transform:uppercase;font-style:normal;color:var(--accent);position:relative}
+
+    /* ---------- CTA ---------- */
+    .cta{min-height:580px;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 20px;overflow:hidden}
+    .cta:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(5,13,26,.62),rgba(5,13,26,.74)),url("https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=2000&q=90") center/cover;filter:saturate(.7)}
+    .cta-inner{position:relative}
+    .cta h2{font:400 clamp(50px,6.7vw,100px)/.95 var(--serif);letter-spacing:-.065em;margin:20px 0 38px}
+
+    /* ---------- Footer ---------- */
+    footer{background:var(--navy-deep);padding:80px 5.55vw 32px}
+    .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:36px;padding-bottom:76px}
+    .footer-brand p{color:var(--muted);max-width:320px;font-size:15px;line-height:1.75;margin-top:24px}
+    .footer-col h4{font:12px var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin:3px 0 22px}
+    .footer-col a{display:block;font-size:15px;color:#b8c3d4;margin:13px 0;transition:.25s}
+    .footer-col a:hover{color:var(--accent-bright)}
+    .newsletter{border-bottom:1px solid #3a4a60;padding:12px 0;display:flex;justify-content:space-between;font:14px var(--sans);color:var(--muted);cursor:pointer;transition:.25s}
+    .newsletter:hover{border-color:var(--accent);color:var(--accent-bright)}
+    .footer-base{border-top:1px solid var(--line);padding-top:26px;display:flex;justify-content:space-between;color:var(--muted);font:11px var(--mono);letter-spacing:.1em;text-transform:uppercase}
+
+    /* ---------- Responsive ---------- */
+    @media(max-width:1100px){
+      .product-grid{grid-template-columns:repeat(2,1fr)}
+      .insta-grid{grid-template-columns:repeat(3,1fr)}
+      nav{gap:24px}
+      .header-actions{gap:20px}
+    }
+    @media(max-width:800px){
+      header{height:82px;padding:0 22px}
+      .logo-word{font-size:18px;letter-spacing:.28em}
+      .logo-sub{font-size:8px;letter-spacing:.36em;padding-left:19px}
+      nav,.header-actions>a{display:none}
+      .menu-button{display:block}
+      .hero{min-height:640px;padding:0 23px;align-items:center}
+      .hero h1{font-size:clamp(54px,15vw,84px);margin:20px 0 30px}
+      .hero-bottom{flex-direction:column;align-items:flex-start;gap:28px}
+      .hero-description{font-size:16px;max-width:none}
+      .hero-count,.hero-scroll{display:none}
+      .section{padding:92px 23px}
+      .section-head{display:block;margin-bottom:48px}
+      .section-head h2{font-size:46px}
+      .section-head p{margin:20px 0 0;font-size:15px;max-width:none}
+      .marquee{height:92px}
+      .collections-grid{display:block}
+      .collection{height:360px;margin-bottom:14px}
+      .collection:first-child{height:480px}
+      .collection-content{left:24px;bottom:26px}
+      .reserve{display:block}
+      .reserve-image{min-height:440px}
+      .reserve-content{padding:80px 23px}
+      .reserve-content h2{font-size:50px}
+      .reserve-details{margin-top:48px}
+      .pillars{display:block}
+      .pillar,.pillar:not(:first-child){min-height:auto;padding:28px 0 32px;margin:0;border-right:0;border-bottom:1px solid var(--line)}
+      .pillar h3{margin:26px 0 12px;font-size:27px}
+      .pillar p{font-size:15px}
+      .product-grid{grid-template-columns:repeat(2,1fr);gap:30px 14px}
+      .product-image{height:260px}
+      .product h3{font-size:19px}
+      .product-info{display:block}
+      .price{margin-top:14px}
+      .process-wrap{display:block}
+      .process-intro{margin-bottom:48px;font-size:16px}
+      .step{grid-template-columns:44px 1fr auto;gap:16px}
+      .step h3{font-size:26px}
+      .social-top{padding:78px 23px 40px;display:block}
+      .social-link{display:inline-block;margin-top:28px}
+      .insta-grid{grid-template-columns:repeat(2,1fr);padding:0 23px 80px;gap:12px}
+      .quote{padding:95px 23px}
+      .quote blockquote{font-size:35px}
+      .cta{min-height:460px}
+      .cta h2{font-size:56px}
+      footer{padding:60px 23px 26px}
+      .footer-top{grid-template-columns:1fr 1fr;gap:48px 22px}
+      .footer-brand{grid-column:span 2}
+      .footer-base{display:block;line-height:2.1;text-align:center}
+      .footer-base span{display:block}
+      .btn{padding:15px 28px;font-size:11px}
+    }
+    @media(max-width:480px){
+      .product-grid{grid-template-columns:1fr}
+      .insta-grid{grid-template-columns:1fr 1fr}
+      .hero h1{font-size:clamp(48px,13vw,68px)}
+      .section-head h2{font-size:38px}
+      .reserve-content h2{font-size:42px}
+      .cta h2{font-size:44px}
+      .quote blockquote{font-size:28px}
+      .footer-top{grid-template-columns:1fr;gap:40px}
+      .footer-brand{grid-column:auto}
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <a class="logo" href="#"><span class="logo-word">Hudson</span><span class="logo-sub">Watch Exchange</span></a>
+    <nav>
+      <a href="#collections">Collections</a>
+      <a href="#reserve">Private Reserve</a>
+      <a href="#arrivals">New Arrivals</a>
+      <a href="#journal">Journal</a>
+    </nav>
+    <div class="header-actions">
+      <a href="#sell">Sell With Us</a>
+      <a href="#contact">Book an Appointment</a>
+      <button class="menu-button" aria-label="Open menu">MENU&nbsp;&nbsp;☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <video class="hero-video" autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=1600&q=80" aria-hidden="true">
+        <source src="media/watches.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-count">EST. 2014 — NEW YORK</div>
+      <div class="hero-copy">
+        <div class="eyebrow">The discerning collector's house</div>
+        <h1>Objects of<br><i>lasting</i> value.</h1>
+        <div class="hero-bottom">
+          <p class="hero-description">An exacting edit of exceptional watches and handbags, sourced with discernment and offered with complete confidence — each piece authenticated, documented, and entrusted to its next chapter.</p>
+          <a class="btn btn-outline" href="#collections">Explore the collection <span>→</span></a>
+        </div>
+      </div>
+      <div class="hero-scroll">Scroll to discover</div>
+    </section>
+
+    <section class="marquee" aria-label="Brands we represent">
+      <div class="marquee-track">
+        <span>Rolex <i></i> Patek Philippe <i></i> Audemars Piguet <i></i> Cartier <i></i> Hermès <i></i> Richard Mille <i></i> Breguet <i></i> Rolex <i></i> Patek Philippe <i></i> Audemars Piguet <i></i> Cartier <i></i> Hermès <i></i> Richard Mille <i></i> Breguet <i></i></span>
+      </div>
+    </section>
+
+    <section class="section collections" id="collections">
+      <div class="section-head">
+        <div class="eyebrow">Curated by conviction</div>
+        <div>
+          <h2>Every collection begins with a point of view.</h2>
+          <p>From grail-worthy references to quietly iconic leather, our selection is built around provenance, condition, and the pleasure of owning something exceptional.</p>
+        </div>
+      </div>
+      <div class="collections-grid">
+        <a class="collection" href="#">
+          <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=1200&q=90" alt="Fine luxury watch">
+          <div class="collection-content"><div class="eyebrow">178 pieces available</div><h3>Exceptional Watches</h3></div><span class="plus">+</span>
+        </a>
+        <a class="collection" href="#">
+          <img src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1000&q=90" alt="Luxury handbag">
+          <div class="collection-content"><div class="eyebrow">64 pieces available</div><h3>Handbags</h3></div><span class="plus">+</span>
+        </a>
+        <a class="collection" href="#">
+          <img src="https://images.unsplash.com/photo-1511370235399-1802cae1d32f?auto=format&fit=crop&w=1000&q=90" alt="Vintage watch detail">
+          <div class="collection-content"><div class="eyebrow">A study in history</div><h3>Vintage &amp; Rare</h3></div><span class="plus">+</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="reserve" id="reserve">
+      <div class="reserve-image"></div>
+      <div class="reserve-content">
+        <div class="eyebrow">By private appointment</div>
+        <h2>The Hudson<br>Private Reserve.</h2>
+        <p>For the pieces that never reach the gallery floor. Our Private Reserve connects established collectors with the world's most sought-after watches, jewellery, and handbags through a discreet, personal service.</p>
+        <a href="#contact" class="text-link">Discover private reserve <span>→</span></a>
+        <div class="reserve-details">
+          <div><span>01</span><span>Dedicated sourcing</span></div>
+          <div><span>02</span><span>Discreet consignment</span></div>
+          <div><span>03</span><span>Global collector network</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section why">
+      <div class="section-head">
+        <div class="eyebrow">The Hudson standard</div>
+        <div><h2>Confidence is the ultimate luxury.</h2></div>
+      </div>
+      <div class="pillars">
+        <div class="pillar"><div class="pillar-number">01 / AUTHENTICITY</div><h3>Nothing overlooked.</h3><p>Every object is rigorously authenticated by category specialists before it enters our collection.</p></div>
+        <div class="pillar"><div class="pillar-number">02 / CONDITION</div><h3>Truth in every detail.</h3><p>We document condition with candour, so the only surprise is how remarkable your piece feels in hand.</p></div>
+        <div class="pillar"><div class="pillar-number">03 / RELATIONSHIP</div><h3>Here for the long view.</h3><p>From a first acquisition to an evolving collection, our counsel endures long after the transaction.</p></div>
+      </div>
+    </section>
+
+    <section class="section arrivals" id="arrivals">
+      <div class="section-head">
+        <div class="eyebrow">Just arrived</div>
+        <div><h2>Noteworthy, now.</h2><p>Recently authenticated pieces selected for their character, rarity, and enduring appeal.</p></div>
+      </div>
+      <div class="product-grid">
+        <a class="product" href="#">
+          <div class="product-image"><img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=700&q=85" alt="Rolex Cosmograph Daytona"><span class="product-tag">New Arrival</span></div>
+          <div class="product-info"><div><div class="product-brand">Rolex · 2021</div><h3>Cosmograph Daytona</h3></div><div class="price">$38,500</div></div>
+        </a>
+        <a class="product" href="#">
+          <div class="product-image"><img src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?auto=format&fit=crop&w=700&q=85" alt="Cartier Tank watch"></div>
+          <div class="product-info"><div><div class="product-brand">Cartier · 1998</div><h3>Tank Française</h3></div><div class="price">$7,900</div></div>
+        </a>
+        <a class="product" href="#">
+          <div class="product-image"><img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=700&q=85" alt="Hermes handbag"><span class="product-tag">Collector's edit</span></div>
+          <div class="product-info"><div><div class="product-brand">Hermès · 2022</div><h3>Kelly 25 Sellier</h3></div><div class="price">$24,000</div></div>
+        </a>
+        <a class="product" href="#">
+          <div class="product-image"><img src="https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=700&q=85" alt="Audemars Piguet watch"></div>
+          <div class="product-info"><div><div class="product-brand">Audemars Piguet · 2020</div><h3>Royal Oak Selfwinding</h3></div><div class="price">$46,250</div></div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section process" id="sell">
+      <div class="process-wrap">
+        <div>
+          <div class="eyebrow">A considered exchange</div>
+          <h2>Part with a piece,<br>not the story.</h2>
+          <p class="process-intro">Whether you are refining a collection or finding the right home for a singular object, our process is direct, confidential, and exacting.</p>
+        </div>
+        <div class="steps">
+          <a class="step" href="#"><span class="step-no">01</span><h3>Share your piece with us</h3><span class="arrow">↗</span></a>
+          <a class="step" href="#"><span class="step-no">02</span><h3>Receive a considered valuation</h3><span class="arrow">↗</span></a>
+          <a class="step" href="#"><span class="step-no">03</span><h3>Choose your preferred route</h3><span class="arrow">↗</span></a>
+          <a class="step" href="#"><span class="step-no">04</span><h3>Enjoy a seamless exchange</h3><span class="arrow">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="social" id="journal">
+      <div class="social-top">
+        <div><div class="eyebrow">Follow the conversation</div><h2>From the Hudson world.</h2></div>
+        <a href="#" class="social-link">@hudsonwatchexchange&nbsp; ↗</a>
+      </div>
+      <div class="insta-grid">
+        <div class="insta-card">
+          <img src="https://images.unsplash.com/photo-1495856458515-0637185db551?auto=format&fit=crop&w=700&q=85" alt="Watch collector detail">
+          <span class="insta-badge">♡</span>
+          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">A Daytona finds its next custodian.</div><div class="insta-meta"><span>♡ 1,284</span><span>💬 38</span></div></div>
+        </div>
+        <div class="insta-card">
+          <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&q=85" alt="Luxury wristwatch">
+          <span class="insta-badge">♡</span>
+          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">Client delivery — Royal Oak, sealed.</div><div class="insta-meta"><span>♡ 2,041</span><span>💬 67</span></div></div>
+        </div>
+        <div class="insta-card">
+          <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=85" alt="Luxury handbag detail">
+          <span class="insta-badge">♡</span>
+          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">Hermès Kelly, freshly authenticated.</div><div class="insta-meta"><span>♡ 976</span><span>💬 22</span></div></div>
+        </div>
+        <div class="insta-card">
+          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=700&q=85" alt="Fine watch mechanism">
+          <span class="insta-badge">♡</span>
+          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">The movement, up close. Perfection in motion.</div><div class="insta-meta"><span>♡ 1,572</span><span>💬 44</span></div></div>
+        </div>
+        <div class="insta-card">
+          <img src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=700&q=85" alt="Boutique lifestyle">
+          <span class="insta-badge">♡</span>
+          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">Inside the Hudson boutique, by appointment.</div><div class="insta-meta"><span>♡ 831</span><span>💬 19</span></div></div>
+        </div>
+        <div class="insta-card">
+          <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=700&q=85" alt="Collector delivery">
+          <span class="insta-badge">♡</span>
+          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">Cosmograph Daytona — handed to its new keeper.</div><div class="insta-meta"><span>♡ 2,318</span><span>💬 81</span></div></div>
+        </div>
+        <div class="insta-card">
+          <img src="https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?auto=format&fit=crop&w=700&q=85" alt="Cartier Tank">
+          <span class="insta-badge">♡</span>
+          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">A vintage Tank Française, circa 1998.</div><div class="insta-meta"><span>♡ 1,109</span><span>💬 31</span></div></div>
+        </div>
+        <div class="insta-card">
+          <img src="https://images.unsplash.com/photo-1614164185128-e4ec99c436d7?auto=format&fit=crop&w=700&q=85" alt="Audemars Piguet">
+          <span class="insta-badge">♡</span>
+          <div class="insta-overlay"><div class="insta-handle">@hudsonwatchexchange</div><div class="insta-caption">Royal Oak Selfwinding — grail territory.</div><div class="insta-meta"><span>♡ 1,845</span><span>💬 52</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote">
+      <span class="quote-mark">“</span>
+      <blockquote>Hudson understands that the value of a great watch is never just in its metal or mechanics. It is in the life it has already lived—and the one ahead of it.</blockquote>
+      <cite>— James R., Private Client since 2017</cite>
+    </section>
+
+    <section class="cta" id="contact">
+      <div class="cta-inner">
+        <div class="eyebrow">Begin a conversation</div>
+        <h2>Find your next<br><i>forever</i> piece.</h2>
+        <a href="mailto:concierge@hudsonwatch.exchange" class="btn btn-primary">Speak with a specialist <span>→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="#"><span class="logo-word">Hudson</span><span class="logo-sub">Watch Exchange</span></a>
+        <p>New York's independent house for exceptional watches, handbags, and the stories they carry.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <a href="#collections">Watches</a><a href="#collections">Handbags</a><a href="#reserve">Private Reserve</a><a href="#sell">Sell With Us</a>
+      </div>
+      <div class="footer-col">
+        <h4>Visit</h4>
+        <a href="#contact">Book Appointment</a><a href="#">Our Story</a><a href="#journal">The Journal</a><a href="#">Client Services</a>
+      </div>
+      <div class="footer-col">
+        <h4>Letters from Hudson</h4>
+        <div class="newsletter"><span>Your email address</span><span>→</span></div>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2024 Hudson Watch Exchange</span>
+      <span>New York · London · Worldwide</span>
+      <span>Privacy &nbsp; Terms</span>
+    </div>
+  </footer>
+  <script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 80));
+    document.querySelector('.menu-button')?.addEventListener('click', function(){
+      const nav = document.querySelector('nav');
+      const open = nav.style.display === 'flex';
+      nav.style.display = open ? '' : 'flex';
+      if(!open){
+        nav.style.cssText = 'display:flex;position:absolute;top:82px;left:0;width:100%;padding:28px 23px;background:var(--navy-deep);flex-direction:column;align-items:flex-start;gap:22px;border-bottom:1px solid var(--line)';
+      }
+    });
+  </script>
+</body>
+</html>
